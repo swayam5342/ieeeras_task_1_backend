@@ -25,3 +25,9 @@ def read_items():
     else:
         raise HTTPException(status_code=404, detail="No items found")
 
+@root.post("/items", response_model=Book)
+def create_item(item: Book):
+    if item.id in db:
+        raise HTTPException(status_code=400, detail="Item already exists")
+    db[item.id] = item.model_dump()
+    return item
