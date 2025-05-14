@@ -40,3 +40,10 @@ def update_item(item_id: int, item: Book):
         raise HTTPException(status_code=400, detail="Item ID mismatch")
     db[item_id] = item.model_dump()
     return item
+
+@root.delete("/items/{item_id}")
+def delete_item(item_id: int):
+    if item_id not in db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    del db[item_id]
+    return {"message": "Item deleted successfully"}
