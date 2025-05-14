@@ -6,10 +6,10 @@ root = APIRouter()
 db={
     1:{
         "id":1,
-        "title":"book1",
-        "author":"author1",
-        "year":2020,
-        "genre":"fiction"
+        "title":"DSA in Java",
+        "author":"John Doe",
+        "year":2019,
+        "genre":"Programming",
     }
 }
 
