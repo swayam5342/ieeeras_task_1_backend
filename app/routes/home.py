@@ -31,3 +31,12 @@ def create_item(item: Book):
         raise HTTPException(status_code=400, detail="Item already exists")
     db[item.id] = item.model_dump()
     return item
+
+@root.put("/items/{item_id}", response_model=Book)
+def update_item(item_id: int, item: Book):
+    if item_id not in db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    if item.id != item_id:
+        raise HTTPException(status_code=400, detail="Item ID mismatch")
+    db[item_id] = item.model_dump()
+    return item
